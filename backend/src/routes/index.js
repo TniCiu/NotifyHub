@@ -5,7 +5,7 @@ const {
     validateRegister,
     validateLogin,
     validateUserId,
-} = require("../middlewares/user.validate.middleware")
+} = require("../validators/user.validator")
 
 router.post("/login", validateLogin, UserController.login)
 router.post("/register", validateRegister, UserController.register)
