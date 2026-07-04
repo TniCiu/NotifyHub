@@ -26,6 +26,12 @@ function validatePassword(password) {
     }
 }
 
+function validatePasswordRequired(password) {
+    if (isBlank(password)) {
+        throw new AppError(MESSAGES.AUTH.PASSWORD_REQUIRED, HTTP_STATUS.BAD_REQUEST);
+    }
+}
+
 function validateRegister(req, res, next) {
     try {
         const { fullName, full_name, email, password } = req.body;
@@ -47,7 +53,7 @@ function validateLogin(req, res, next) {
         const { email, password } = req.body;
 
         validateEmail(email);
-        validatePassword(password);
+        validatePasswordRequired(password);
         next();
     } catch (error) {
         next(error);

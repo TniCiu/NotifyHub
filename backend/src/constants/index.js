@@ -1,16 +1,16 @@
-const { HTTP_STATUS, HTTP_STATUS_TEXT } = require("./httpStatus");
-const {
-  MESSAGES,
-  AUTH_MESSAGES,
-  USER_MESSAGES,
-  ERROR_MESSAGES,
-} = require("./messages");
+const { HTTP_STATUS, HTTP_STATUS_TEXT } = require("./http/httpStatus");
+const AUTH = require("./messages/auth/auth.message");
+const USER = require("./messages/user/user.message");
+const ERROR = require("./messages/error/error.message");
+
+const MESSAGES = {
+  AUTH,
+  USER,
+  ERROR,
+};
 
 module.exports = {
   HTTP_STATUS,
   HTTP_STATUS_TEXT,
   MESSAGES,
-  AUTH_MESSAGES,
-  USER_MESSAGES,
-  ERROR_MESSAGES,
 };

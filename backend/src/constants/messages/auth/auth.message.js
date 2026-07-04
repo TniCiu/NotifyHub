@@ -1,4 +1,4 @@
-const AUTH_MESSAGES = {
+const AUTH = {
   REGISTER_SUCCESS: "User registered successfully",
   LOGIN_SUCCESS: "Login successful",
   FULL_NAME_REQUIRED: "Full name is required",
@@ -14,4 +14,4 @@ const AUTH_MESSAGES = {
   TOKEN_EXPIRED: "Token expired",
 };
 
-module.exports = AUTH_MESSAGES;
+module.exports = AUTH;
