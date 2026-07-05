@@ -1,15 +1,8 @@
-const router = require("express").Router()
-const UserController = require("../controllers/user.controller")
-const authMiddleware = require("../middlewares/auth.middleware")
-const {
-    validateRegister,
-    validateLogin,
-    validateUserId,
-} = require("../validators/user.validator")
+const Route = require("express").Router()
+const UserRoute = require("./user.rotue")
+const TemplateRoute = require("./template.route")
 
-router.post("/login", validateLogin, UserController.login)
-router.post("/register", validateRegister, UserController.register)
-router.get("/users", authMiddleware, UserController.findAll)
-router.get("/users/:id", authMiddleware, validateUserId, UserController.findById)
+Route.use("/users", UserRoute)
+Route.use("/templates", TemplateRoute)
 
-module.exports = router
+module.exports = Route
