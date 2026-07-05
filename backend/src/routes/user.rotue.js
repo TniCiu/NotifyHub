@@ -9,7 +9,7 @@ const {
 
 router.post("/login", validateLogin, UserController.login)
 router.post("/register", validateRegister, UserController.register)
-router.get("/users", authMiddleware, UserController.findAll)
-router.get("/users/:id", authMiddleware, validateUserId, UserController.findById)
+router.get("/", authMiddleware, UserController.findAll)
+router.get("/:id", authMiddleware, validateUserId, UserController.findById)
 
 module.exports = router

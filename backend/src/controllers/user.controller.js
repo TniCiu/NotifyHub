@@ -1,45 +1,31 @@
-const userService = require("../services/user.service");
-const ApiResponse = require("../common/ApiReponse");
-const { HTTP_STATUS, MESSAGES } = require("../constants");
+const userService = require("../services/user.service")
+const ApiResponse = require("../common/ApiReponse")
+const { HTTP_STATUS, MESSAGES } = require("../constants")
+const asyncHandler = require("../common/asyncHandler")
 
-async function register(req, res, next) {
-    try {
-        const user = req.body
-        const newUser = await userService.register(user)
-        new ApiResponse(HTTP_STATUS.CREATED, MESSAGES.AUTH.REGISTER_SUCCESS, newUser).send(res)
-    } catch (error) {
-        next(error)
-    }
-}
+const register = asyncHandler(async (req, res, next) => {
+    const user = req.body
+    const newUser = await userService.register(user)
+    new ApiResponse(HTTP_STATUS.CREATED, MESSAGES.AUTH.REGISTER_SUCCESS, newUser).send(res)
+})
 
-async function login(req, res, next) {
-    try {
-        const { email, password } = req.body
-        const user = await userService.login(email, password)
-        new ApiResponse(HTTP_STATUS.OK, MESSAGES.AUTH.LOGIN_SUCCESS, user).send(res)
-    } catch (error) {
-        next(error)
-    }
-}
+const login = asyncHandler(async (req, res, next) => {
+    const { email, password } = req.body
+    const user = await userService.login(email, password)
+    new ApiResponse(HTTP_STATUS.OK, MESSAGES.AUTH.LOGIN_SUCCESS, user).send(res)
+})
 
-async function findAll(req, res, next) {
-    try {
-        const users = await userService.findAll()
-        new ApiResponse(HTTP_STATUS.OK, MESSAGES.USER.GET_ALL_SUCCESS, users).send(res)
-    } catch (error) {
-        next(error)
-    }
-}
+const findAll = asyncHandler(async (req, res, next) => {
+    const users = await userService.findAll()
+    new ApiResponse(HTTP_STATUS.OK, MESSAGES.USER.GET_ALL_SUCCESS, users).send(res)
+})
 
-async function findById(req, res, next) {
-    try {
-        const id = req.params.id
-        const user = await userService.findById(id)
-        new ApiResponse(HTTP_STATUS.OK, MESSAGES.USER.GET_DETAIL_SUCCESS, user).send(res)
-    } catch (error) {
-        next(error)
-    }
-}
+const findById = asyncHandler(async (req, res, next) => {
+    const id = req.params.id
+    const user = await userService.findById(id)
+    new ApiResponse(HTTP_STATUS.OK, MESSAGES.USER.GET_DETAIL_SUCCESS, user).send(res)
+})
+
 module.exports = {
     register,
     login,
