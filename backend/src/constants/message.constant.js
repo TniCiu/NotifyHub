@@ -20,6 +20,14 @@ const MESSAGES = {
     ID_INVALID: "User id is invalid",
     NOT_FOUND: "User not found",
   },
+  TEMPLATE: {
+    CREATE_SUCCESS: "Template created successfully",
+    GET_ALL_SUCCESS: "Templates retrieved successfully",
+    GET_DETAIL_SUCCESS: "Template retrieved successfully",
+    ID_INVALID: "Template id is invalid",
+    NOT_FOUND: "Template not found",
+  },
+  
   ERROR: {
     INTERNAL_SERVER_ERROR: "Internal server error",
   },
