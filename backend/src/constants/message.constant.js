@@ -24,10 +24,18 @@ const MESSAGES = {
     CREATE_SUCCESS: "Template created successfully",
     GET_ALL_SUCCESS: "Templates retrieved successfully",
     GET_DETAIL_SUCCESS: "Template retrieved successfully",
+    UPDATE_SUCCESS: "Template updated successfully",
+    DELETE_SUCCESS: "Template deleted successfully",
+    PREVIEW_SUCCESS: "Template preview generated successfully",
     ID_INVALID: "Template id is invalid",
     NOT_FOUND: "Template not found",
+    EXISTS: "Template already exists",
+    MISSING_VARIABLES: "Template data is missing required variables",
   },
-  
+  VALIDATION:{
+    VALIDATION_ERROR:"Validation error",
+  }
+  ,
   ERROR: {
     INTERNAL_SERVER_ERROR: "Internal server error",
   },
