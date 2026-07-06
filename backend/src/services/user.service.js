@@ -1,6 +1,6 @@
 const UserRepository = require('../repositories/user.repository')
 const AppError = require('../common/AppError')
-const { HTTP_STATUS, MESSAGES } = require("../constants")
+const { HTTP_STATUS, MESSAGES, ERROR_CODE } = require("../constants")
 const { signToken } = require("../utils/jwt")
 
 function toSafeUser(user) {
@@ -11,7 +11,7 @@ function toSafeUser(user) {
 async function register(user) {
     const existingUser = await UserRepository.findByEmail(user.email)
     if (existingUser) {
-        throw new AppError(MESSAGES.AUTH.USER_EXISTS, HTTP_STATUS.CONFLICT)
+        throw new AppError(MESSAGES.AUTH.USER_EXISTS, HTTP_STATUS.CONFLICT, ERROR_CODE.USER.ALREADY_EXISTS)
     }
     const newUser = await UserRepository.create(user)
     return toSafeUser(newUser)
@@ -19,7 +19,7 @@ async function register(user) {
 async function login(email, password) {
     const user = await UserRepository.findByEmail(email)
     if (!user || user.password_hash !== password) {
-        throw new AppError(MESSAGES.AUTH.INVALID_CREDENTIALS, HTTP_STATUS.UNAUTHORIZED)
+        throw new AppError(MESSAGES.AUTH.INVALID_CREDENTIALS, HTTP_STATUS.UNAUTHORIZED, ERROR_CODE.AUTH.INVALID_CREDENTIALS)
     }
 
     const token = signToken({
@@ -40,7 +40,7 @@ async function findAll() {
 async function findById(id) {
     const user = await UserRepository.findById(id)
     if (!user) {
-        throw new AppError(MESSAGES.USER.NOT_FOUND, HTTP_STATUS.NOT_FOUND)
+        throw new AppError(MESSAGES.USER.NOT_FOUND, HTTP_STATUS.NOT_FOUND, ERROR_CODE.USER.NOT_FOUND)
     }
     return toSafeUser(user)
 }
