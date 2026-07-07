@@ -1,5 +1,6 @@
 const { sendEmail } = require("./email.service")
 const NotificationRepository = require("../repositories/notification.repository")
+const { notificationService: logger } = require("../utils/logger")
 
 const NOTIFICATION_CHANNEL = {
     EMAIL: "EMAIL",
@@ -15,6 +16,11 @@ async function handleNotification(notification) {
         throw new Error(`Unsupported notification channel: ${notification.channel}`)
     }
 
+    logger.info("sendEmail start", {
+        requestId: notification.requestId,
+        receiver: notification.receiver,
+    })
+
     const response = await sendEmail({
         to: notification.receiver,
         subject: notification.subject,
@@ -22,6 +28,11 @@ async function handleNotification(notification) {
     })
 
     await NotificationRepository.updateRequestStatus(notification.requestId, NOTIFICATION_STATUS.SENT)
+    logger.info("updateStatus success", {
+        requestId: notification.requestId,
+        status: NOTIFICATION_STATUS.SENT,
+    })
+
     await NotificationRepository.createLog({
         requestId: notification.requestId,
         action: "SEND_EMAIL",
@@ -29,6 +40,11 @@ async function handleNotification(notification) {
         message: "Email sent successfully",
         rawRequest: notification,
         rawResponse: response,
+    })
+
+    logger.info("sendEmail success", {
+        requestId: notification.requestId,
+        messageId: response.messageId,
     })
 }
 
@@ -38,6 +54,11 @@ async function handleNotificationError(notification, error) {
         NOTIFICATION_STATUS.FAILED,
         error.message
     )
+    logger.info("updateStatus success", {
+        requestId: notification.requestId,
+        status: NOTIFICATION_STATUS.FAILED,
+    })
+
     await NotificationRepository.createLog({
         requestId: notification.requestId,
         action: "SEND_EMAIL",
