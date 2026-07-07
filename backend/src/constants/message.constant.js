@@ -47,6 +47,13 @@ const MESSAGES = {
     SEND_SUCCESS: "Email sent successfully",
     SEND_FAILED: "Email send failed",
   },
+  DASHBOARD: {
+    DASHBOARD_SUMMARY_SUCCESS: "Get dashboard summary successfully",
+    DASHBOARD_TREND_SUCCESS: "Get dashboard trend successfully",
+    DASHBOARD_DISTRIBUTION_SUCCESS: "Get channel distribution successfully",
+    DASHBOARD_TEMPLATES_SUCCESS: "Get top templates successfully",
+
+  },
   VALIDATION: {
     VALIDATION_ERROR: "Validation error",
   },
