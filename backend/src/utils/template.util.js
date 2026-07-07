@@ -1,7 +1,7 @@
 const Handlebars = require('handlebars')
 
 function extractVariables(content = " "){
-    const regex = / {{\s*(a-zA-Z0-9_]+)\s*}} /g
+    const regex = /{{\s*([a-zA-Z0-9_]+)\s*}}/g
     const variables = new Set()
 
     let match
