@@ -27,11 +27,22 @@ async function handleNotification(notification) {
         html: notification.content,
     })
 
-    await NotificationRepository.updateRequestStatus(notification.requestId, NOTIFICATION_STATUS.SENT)
+    const request = await NotificationRepository.updateRequestStatus(notification.requestId, NOTIFICATION_STATUS.SENT)
     logger.info("updateStatus success", {
         requestId: notification.requestId,
         status: NOTIFICATION_STATUS.SENT,
     })
+
+    if (request?.campaign_id) {
+        const campaign = await NotificationRepository.refreshCampaignStatistics(request.campaign_id)
+        logger.info("refreshCampaignStatistics success", {
+            requestId: notification.requestId,
+            campaignId: request.campaign_id,
+            campaignStatus: campaign?.status,
+            successCount: campaign?.success_count,
+            failedCount: campaign?.failed_count,
+        })
+    }
 
     await NotificationRepository.createLog({
         requestId: notification.requestId,
@@ -49,7 +60,7 @@ async function handleNotification(notification) {
 }
 
 async function handleNotificationError(notification, error) {
-    await NotificationRepository.updateRequestStatus(
+    const request = await NotificationRepository.updateRequestStatus(
         notification.requestId,
         NOTIFICATION_STATUS.FAILED,
         error.message
@@ -58,6 +69,17 @@ async function handleNotificationError(notification, error) {
         requestId: notification.requestId,
         status: NOTIFICATION_STATUS.FAILED,
     })
+
+    if (request?.campaign_id) {
+        const campaign = await NotificationRepository.refreshCampaignStatistics(request.campaign_id)
+        logger.info("refreshCampaignStatistics success", {
+            requestId: notification.requestId,
+            campaignId: request.campaign_id,
+            campaignStatus: campaign?.status,
+            successCount: campaign?.success_count,
+            failedCount: campaign?.failed_count,
+        })
+    }
 
     await NotificationRepository.createLog({
         requestId: notification.requestId,
