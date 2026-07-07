@@ -9,6 +9,7 @@ async function createRequest({
     payload,
     renderedContent,
     status,
+    campaignId,
 }) {
     const result = await pool.query(
         `
@@ -20,9 +21,10 @@ async function createRequest({
             subject,
             payload,
             rendered_content,
-            status
+            status,
+            campaign_id
         )
-        VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
         RETURNING *
         `,
         [
@@ -34,6 +36,7 @@ async function createRequest({
             JSON.stringify(payload),
             renderedContent,
             status,
+            campaignId || null,
         ]
     )
 

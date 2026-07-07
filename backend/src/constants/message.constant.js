@@ -47,6 +47,14 @@ const MESSAGES = {
     SEND_SUCCESS: "Email sent successfully",
     SEND_FAILED: "Email send failed",
   },
+  CAMPAIGN: {
+    CREATE_SUCCESS: "Campaign created successfully",
+    GET_ALL_SUCCESS: "Campaigns retrieved successfully",
+    GET_DETAIL_SUCCESS: "Campaign retrieved successfully",
+    GET_STATISTICS_SUCCESS: "Campaign statistics retrieved successfully",
+    NOT_FOUND: "Campaign not found",
+    EXISTS: "Campaign already exists",
+  },
   DASHBOARD: {
     DASHBOARD_SUMMARY_SUCCESS: "Get dashboard summary successfully",
     DASHBOARD_TREND_SUCCESS: "Get dashboard trend successfully",
