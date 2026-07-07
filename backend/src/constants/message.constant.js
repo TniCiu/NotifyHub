@@ -32,10 +32,24 @@ const MESSAGES = {
     EXISTS: "Template already exists",
     MISSING_VARIABLES: "Template data is missing required variables",
   },
-  VALIDATION:{
-    VALIDATION_ERROR:"Validation error",
-  }
-  ,
+  NOTIFICATION: {
+    CREATE_SUCCESS: "Notification request created successfully",
+    GET_ALL_SUCCESS: "Notification requests retrieved successfully",
+    GET_DETAIL_SUCCESS: "Notification request retrieved successfully",
+    PUBLISH_SUCCESS: "Notification request published successfully",
+    PUBLISH_FAILED: "Notification request publish failed",
+    NOT_FOUND: "Notification request not found",
+    REQUEST_EXISTS: "Notification request already exists",
+    TEMPLATE_NOT_FOUND: "Notification template not found",
+  },
+  EMAIL: {
+    CONFIG_MISSING: "Email configuration is missing",
+    SEND_SUCCESS: "Email sent successfully",
+    SEND_FAILED: "Email send failed",
+  },
+  VALIDATION: {
+    VALIDATION_ERROR: "Validation error",
+  },
   ERROR: {
     INTERNAL_SERVER_ERROR: "Internal server error",
   },
